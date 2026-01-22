@@ -1144,7 +1144,7 @@ interface WindowFrameProps {
 const WindowFrame: React.FC<WindowFrameProps> = ({ window, activeId, onFocus, onClose, onMinimize, onMaximize, children }) => {
     const isFocused = window.id === activeId;
     // Force maximized state if screen is narrow (mobile)
-    const isMobile = typeof window !== 'undefined' && typeof window.innerWidth !== 'undefined' ? window.innerWidth < 768 : false; // Fallback check
+    const isMobile = typeof window !== 'undefined' && typeof window.size?.width !== 'undefined' ? window.size.height < 768 : false; // Fallback check
 
     // Check real-time width using a CSS media query check in variants or simply rely on standard maximize behavior
     // For simplicity in Framer Motion, we'll use CSS classes for mobile overrides
@@ -1602,7 +1602,7 @@ export default function WebOS() {
                     {Object.keys(APPS).map(key => (
                         <div key={key} onClick={() => openWindow(key)} className="flex flex-col items-center gap-2 group cursor-pointer p-2 hover:bg-white/5 rounded-xl transition-colors active:scale-95">
                             <div className="w-14 h-14 md:w-12 md:h-12 bg-slate-800/80 rounded-2xl md:rounded-xl flex items-center justify-center shadow-lg border border-slate-700/50 group-hover:border-green-500/50 transition-all">
-                                {React.cloneElement(APPS[key].icon as React.ReactElement, { size: 28 })}
+                                {React.cloneElement(APPS[key].icon as React.ReactElement)}
                             </div>
                             <span className="text-[10px] md:text-[11px] font-medium drop-shadow bg-black/40 px-2 rounded-full text-center leading-tight">{APPS[key].title}</span>
                         </div>
